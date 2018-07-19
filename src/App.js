@@ -9,30 +9,14 @@ class App extends Component {
     super(props);
     this.store = this.props.store;
   }
-  componentWillMount() {
-    fetch("https://localhost:5001/api/resource", {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => response.json())
-      .then(parsedJSON => {
-        console.log(parsedJSON);
-        this.setState({
-          resourceList: parsedJSON
-        })
-      })
-  }
-
-
-
 
   render() {
     return (
       <BrowserRouter>
         {
           this.store.getState().isLoggedIn ?
-            <Layout resourceList={this.state.resourceList}>
-              <Routes  store={this.store} />
+            <Layout>
+              <Routes store={this.store} />
             </Layout>
             :
             <div style={{

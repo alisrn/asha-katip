@@ -55,26 +55,11 @@ class mailFolderListItems extends React.Component {
     }))
   }
 
-  componentDidMount = () => {
-
-  }
-
-  componentDidUpdate() {
-    console.log(this.resourceList);
-  }
-
-
-
   render() {
     const { classes } = this.props;
     return (
 
       < MenuList>
-        {this.resourceList.map(resource => {
-          return <MenuItem key={resource.id} className={resource.parenT_ID < 0 ? classes.menuItem: classes.nested} component={Link} to={"/" + resource.code} exact >
-            <ListItemText primary={resource.name} />
-          </MenuItem>
-        })}
         <MenuItem className={classes.menuItem} component={Link} to="/" exact >
           <ListItemIcon>
             <HomeIcon />

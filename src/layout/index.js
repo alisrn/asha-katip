@@ -69,7 +69,7 @@ class Layout extends Component {
           }}
         >
           <div className={classes.toolbar} />
-          <MailFolderListItems resourceList = {this.resourceList}   />
+          <MailFolderListItems />
         </Drawer>
         <main className = {classes.content} >
           <div className = {classes.toolbar}/>

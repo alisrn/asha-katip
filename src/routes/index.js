@@ -25,7 +25,7 @@ class Routes extends React.Component {
                         } />
 
                         <Route exact path="/" render={
-                            (props) => <Home {...props}  resourcelist = {this.props.resourcelist}  store={this.store} />
+                            (props) => <Home {...props}  store={this.store} />
                         } />
 
                         <Route exact path="/customers" render={
@@ -37,7 +37,7 @@ class Routes extends React.Component {
                     <div>
                         <Redirect to="/login" />
                         <Route path="/login" render={
-                            (props) => <Login {...props} resourcelist = {this.props.resourcelist} store={this.store} />
+                            (props) => <Login {...props} store={this.store} />
                         } />
                     </div>
                 }
