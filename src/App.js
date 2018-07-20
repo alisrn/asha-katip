@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         {
-          this.store.getState().isLoggedIn ?
+          !this.store.getState().isLoggedIn ?
             <Layout>
               <Routes store={this.store} />
             </Layout>

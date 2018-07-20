@@ -73,6 +73,14 @@ class mailFolderListItems extends React.Component {
           </ListItemIcon>
           <ListItemText primary="Quality Track" />
         </MenuItem>
+
+        <MenuItem className={classes.menuItem} component={Link} to="/part" exact >
+          <ListItemIcon>
+            <TrackIcon />
+          </ListItemIcon>
+          <ListItemText primary="Part" />
+        </MenuItem>
+
         <MenuItem className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <ProjectIcon />
