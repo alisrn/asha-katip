@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import AccountCircle from '../assets/account_circle_grey.png'
 import swal from 'sweetalert';
 
-import { changeUserInfo, userLogin } from '../actions';
+import { userLogin } from '../actions';
 /* import AccountCircle from '../icons/account_circle_grey.png'
  */
 export default class Login extends React.Component {
@@ -74,16 +74,19 @@ export default class Login extends React.Component {
     }
 
     onChangeHandler = (e) => {
-        this.store.dispatch(changeUserInfo(e.target.name, e.target.value));
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    onSignUpClick = () => {
+        this.props.history.push("/signup");
+    }
+
     render() {
         return (
             <Paper style={this.styles.containerPaper} >
-                <img style={this.styles.accountCircle} src={AccountCircle} alt="profile"/>
+                <img style={this.styles.accountCircle} src={AccountCircle} alt="profile" />
                 <TextField style={this.styles.userItem}
                     name="username"
                     label="Username"
@@ -104,13 +107,12 @@ export default class Login extends React.Component {
                     onClick={this.onLoginClick.bind(this)}>
                     Login
                 </Button>
-                <Button style={this.styles.buttonItem}
+                <Button
                     size="large"
                     variant="raised"
                     color="secondary"
                     onClick={this.onSignUpClick}
-                    style = {{marginBottom:55, marginTop:30, width:200}}
-                    >
+                    style={{ marginBottom: 55, marginTop: 30, width: 200 }}>
                     Sign Up
                 </Button>
             </Paper>

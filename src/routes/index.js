@@ -6,6 +6,7 @@ import {
 import Home from '../pages/home';
 import Login from '../pages/login';
 import Customer from '../pages/customers';
+import Signup from '../pages/signup';
 
 
 
@@ -25,7 +26,7 @@ class Routes extends React.Component {
                         } />
 
                         <Route exact path="/" render={
-                            (props) => <Home {...props}  store={this.store} />
+                            (props) => <Home {...props} store={this.store} />
                         } />
 
                         <Route exact path="/customers" render={
@@ -39,11 +40,13 @@ class Routes extends React.Component {
                         <Route path="/login" render={
                             (props) => <Login {...props} store={this.store} />
                         } />
+                        <Route path="/signup" render={
+                        (props) => <Signup {...props} store={this.store} /> } />
                     </div>
-                }
+                    }
             </Switch>
         );
-    }
-}
-
+            }
+        }
+        
 export default Routes;
