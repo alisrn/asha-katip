@@ -60,9 +60,11 @@ export default class Login extends React.Component {
             )
             .then(response => {
                 if (response.ok) {
-                    swal("Login successful.", "Welcome " + this.state.username + "!", "success");
-                    this.props.history.push("/");
-                    this.store.dispatch(userLogin(response.ok));
+                    swal("Login successful.", "Welcome " + this.state.username + "!", "success")
+                    .then(this.props.history.push("/"))
+                    .then(
+                    this.store.dispatch(userLogin(response.ok))
+                    )
 
                 } else
                     swal(response.message, "Username or password is wrong!", "error");
