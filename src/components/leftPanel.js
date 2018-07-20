@@ -45,7 +45,6 @@ class mailFolderListItems extends React.Component {
     this.state = {
       open: false,
     }
-    this.resourceList = this.props.resourceList
   }
 
 
