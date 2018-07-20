@@ -134,8 +134,8 @@ export default class signUpPage extends React.Component {
                     ).then((response) => response.json()
                     ).then(response => {
                         if (response.ok) {
-                            swal("Successful", response.message, "success");
-                            this.props.history.push("/login");
+                            swal("Successful", response.message, "success")
+                            .then(this.props.history.push("/login"))
                         } else {
                             swal("Error", response.message, "error");
                         }
