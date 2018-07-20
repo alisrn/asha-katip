@@ -11,26 +11,28 @@ import { changeUserInfo, userLogin } from '../actions';
 export default class Login extends React.Component {
     styles = {
         accountCircle: {
-            marginTop: 10,
+            marginTop: 40,
+            width: 120,
+            opacity: 0.65
         },
         containerPaper: {
             marginTop: 100,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: 300,
-            height: 550,
+            width: 320,
         },
         userItem: {
             marginTop: 10,
             width: 200
         },
         passItem: {
+            marginTop: 20,
             width: 200
         },
         buttonItem: {
-            marginTop: 30,
-            width: 150
+            marginTop: 40,
+            width: 200,
         }
     }
     constructor(props) {
@@ -106,7 +108,9 @@ export default class Login extends React.Component {
                     size="large"
                     variant="raised"
                     color="secondary"
-                    onClick={this.onSignUpClick}>
+                    onClick={this.onSignUpClick}
+                    style = {{marginBottom:55, marginTop:30, width:200}}
+                    >
                     Sign Up
                 </Button>
             </Paper>

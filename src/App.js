@@ -19,13 +19,15 @@ class App extends Component {
               <Routes store={this.store} />
             </Layout>
             :
+            
             <div style={{
               display: "flex",
               flex: 1,
               width: "100%",
+              height:"100%",
               alignContent: "center",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}>
               <Routes store={this.store} />
             </div>
