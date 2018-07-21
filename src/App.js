@@ -15,7 +15,7 @@ class App extends Component {
       <BrowserRouter>
         {
           !this.store.getState().isLoggedIn
-            ? <Layout>
+            ? <Layout store = {this.store} >
               <Routes store={this.store} />
             </Layout>
             :                        <div style={{

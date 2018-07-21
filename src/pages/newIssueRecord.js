@@ -9,6 +9,9 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
+import ActionBar from '../components/actionBar'
+import { getButtonList } from "../actions";
+
 const styles = theme => ({
   container: {
     display: "flex",
@@ -43,6 +46,12 @@ class Quality extends React.Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
+    this.buttonList = [{ name: "Save", icon: "Save" },
+    { name: "Clean", icon: "DeleteSweep" }];
+  }
+
+  componentWillMount = () => {
+    this.store.dispatch(getButtonList(this.buttonList));
   }
 
   state = {
@@ -144,9 +153,9 @@ class Quality extends React.Component {
               </FormControl>
 
               <FormControl className={classes.formControl}>
-                <InputLabel style = {{ width: 250 }} htmlFor="Resp">Responsible Department</InputLabel>
+                <InputLabel style={{ width: 250 }} htmlFor="Resp">Responsible Department</InputLabel>
                 <NativeSelect
-                  style = {{ width: 250}}
+                  style={{ width: 250 }}
                   value={this.state.resp}
                   onChange={this.handleChange("resp")}
                   input={<Input name="resp" id="resp" />}

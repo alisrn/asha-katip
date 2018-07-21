@@ -35,3 +35,9 @@ export const userLogin = (isLoggedIn) =>{
         type:'USER_LOGIN', isLoggedIn
     }
 }
+
+export const getButtonList = (buttonList) =>{
+    return{
+        type: "BUTTON_LIST", buttonList
+    }
+}

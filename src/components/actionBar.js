@@ -6,7 +6,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import Button from "@material-ui/core/Button";
 import SaveIcon from '@material-ui/icons/Save';
-const drawerWidth = 240;
+import ClearIcon from '@material-ui/icons/DeleteSweep';
+const drawerWidth = 215;
 
 const styles = theme => ({
     appBar: {
@@ -31,8 +32,11 @@ const styles = theme => ({
         marginRight: drawerWidth,
     },
     button: {
-        margin: theme.spacing.unit * 3 ,
-      },
+        marginLeft: theme.spacing.unit * 2,
+    },
+    buttonList: {
+        marginLeft: theme.spacing.unit * 1,
+    },
 });
 
 class ActionBar extends Component {
@@ -42,8 +46,15 @@ class ActionBar extends Component {
     }
 
     render() {
+        const buttonList = this.store.getState().buttonList;
+        const { classes, anchor, open } = this.props;
 
-        const { classes, anchor, open} = this.props;
+        const buttonDrawer = buttonList.map(function(item){
+            return <Button variant="outlined" size="small" color="primary" className={classes.button}>
+            {item.name}
+            <SaveIcon className={classes.rightIcon} />
+            </Button>}
+        )
 
         return (
             <AppBar className={classNames(classes.appBar, {
@@ -53,10 +64,19 @@ class ActionBar extends Component {
                 style={{ paddingTop: 70, zIndex: 0, backgroundColor: "#eaeaea" }}
             >
                 <Toolbar variant="dense" disableGutters={!open} style={{ height: 5, backgroundColor: "#ffff" }} >
-                    <Button variant="outlined" size="small" color="primary" className={classes.button}>
-                        Save
-             <SaveIcon className={classes.rightIcon} />
-                    </Button>
+                    <div className={classes.buttonList}>
+                        <Button variant="outlined" size="small" color="primary" className={classes.button}>
+                            Save
+                            <SaveIcon className={classes.rightIcon} />
+                        </Button>
+                        <Button variant="outlined" size="small" color="primary" className={classes.button}>
+                            Clean
+                            <ClearIcon className={classes.rightIcon} />
+                        </Button>
+
+                        {buttonDrawer}
+                    </div>
+
                 </Toolbar>
             </AppBar>
 
