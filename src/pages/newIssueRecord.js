@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import { getButtonList } from "../actions";
 
 const styles = theme => ({
   container: {
@@ -43,6 +44,12 @@ class Quality extends React.Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
+    this.buttonList = [{ name: "Save", icon: "Save" },
+    { name: "Clean", icon: "DeleteSweep" }];
+  }
+
+  componentWillMount = () => {
+    this.store.dispatch(getButtonList(this.buttonList));
   }
 
   state = {
@@ -347,6 +354,7 @@ class Quality extends React.Component {
                 className={classes.textField}
                 margin="normal"
               />
+              
             </div>
           </div>
         </Paper>

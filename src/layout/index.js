@@ -167,10 +167,10 @@ class Layout extends Component {
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
               ASHA KATIP
-              </Typography>
+            </Typography>
           </Toolbar>
-        </AppBar>
-        <ActionBar anchor={anchor} open = {open} />
+         </AppBar>
+         {this.store.getState().buttonList ? <ActionBar store={this.store} anchor={anchor} open={open} /> : <Divider/>}
         {right}
         <main className={classNames(classes.content, classes[`content-${anchor}`], {
           [classes.contentShift]: open,
