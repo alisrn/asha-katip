@@ -15,6 +15,7 @@ import SettingIcon from '@material-ui/icons/Settings';
 import AdminIcon from '@material-ui/icons/Security';
 import ProfileIcon from '@material-ui/icons/Person';
 import NextIcon from '@material-ui/icons/NavigateNext';
+import PlusIcon from '@material-ui/icons/Add';
 
 
 const styles = theme => ({
@@ -35,6 +36,10 @@ const styles = theme => ({
       },
     },
   },
+  nestedText: {
+    marginLeft: -theme.spacing.unit * 2,
+    fontSize:'8px'
+  },
   primary: {},
   icon: {},
 });
@@ -52,124 +57,112 @@ class mailFolderListItems extends React.Component {
       clickedItem: ""
     }
   }
-
-
-  clickHandler = (e) => {
-    switch (e.target.innerText) {
-      
-      case "Home":
-        this.setState(state => ({
-          isHomeOpen: !state.isHomeOpen
-        }))
-        break;
-
-      case "Quality Track":
-        this.setState(state => ({
-          isQualityOpen: !state.isQualityOpen
-        }))
-        break;
-
-      case "Projects":
-        this.setState(state => ({
-          isProjectOpen: !state.isProjectOpen
-        }))
-        break;
-
-      case "Reports":
-        this.setState(state => ({
-          isReportOpen: !state.isReportOpen
-        }))
-        break;
-
-      case "Settings":
-        this.setState(state => ({
-          isAdminOpen: !state.isAdminOpen
-        }))
-        break;
-
-      case "Administration":
-        this.setState(state => ({
-          isSettingOpen: !state.isSettingOpen
-        }))
-        break;
-
-      default:
-        break;
-    };
-    this.setState({
-      clickedItem: e.target.innerText
-    })
-
+  clickHome = () => {
+    this.setState(state => ({
+      isHomeOpen: !state.isHomeOpen,
+      clickedItem: "Home"
+    }))
   }
 
+  clickQuality = () => {
+    this.setState(state => ({
+      isQualityOpen: !state.isQualityOpen,
+      clickedItem: "Quality"
+    }))
+  }
+
+  clickProject = () => {
+    this.setState(state => ({
+      isProjectOpen: !state.isProjectOpen,
+      clickedItem: "Project"
+    }))
+  }
+
+  clickNewIssueRecord = () => {
+    this.setState(state => ({
+      clickedItem: "NewIssueRecord"
+    }))
+  }
 
   render() {
     const { classes } = this.props;
     return (
 
       < MenuList>
-        <MenuItem key = {1} className={classes.menuItem} component={Link} to="/" exact onClick={this.clickHandler.bind(this)} >
-          <ListItemIcon id={1} >
+        <MenuItem style={this.state.clickedItem === "Home" ? { backgroundColor: "#B9CCEC" } : {}} className={classes.menuItem} component={Link} to="/" exact onClick={this.clickHome.bind(this)} >
+          <ListItemIcon >
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText id={1} primary="Home" style = {{zIndex:2, width:"100%"}}/>
+          <ListItemText primary="Home" style={{ zIndex: 2, width: "100%" }} />
         </MenuItem>
-        }
 
-        <MenuItem key = {2} className={classes.menuItem} component={Link} to="/quality" exact onClick={this.clickHandler.bind(this)} >
+        <MenuItem
+          style={this.state.clickedItem === "Quality" ? { backgroundColor: "#B9CCEC" } : {}}
+          className={classes.menuItem}
+          component={Link} to="/quality" exact
+          onClick={this.clickQuality.bind(this)} >
           <ListItemIcon>
             <TrackIcon />
           </ListItemIcon>
           <ListItemText primary="Quality Track" />
-        </MenuItem>
-
-        <MenuItem className={classes.menuItem} component={Link} to="/part" exact onClick={this.clickHandler.bind(this)} >
-          <ListItemIcon>
-            <TrackIcon />
-          </ListItemIcon>
-          <ListItemText primary="Part" />
-        </MenuItem>
-
-        <MenuItem className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
-          <ListItemIcon>
-            <ProjectIcon />
-          </ListItemIcon>
-          <ListItemText primary="Projects" />
-          <ListItemIcon style={this.state.open ? { transform: 'rotate(90deg)' } : {}} >
+          <ListItemIcon style={this.state.isQualityOpen ? { transform: 'rotate(90deg)' } : {}} >
             <NextIcon />
           </ListItemIcon>
         </MenuItem>
-        {this.state.isProjectOpen ?
-          <MenuItem name = "asdasd" className={classes.nested} component={Link} to="/" exact >
+        {this.state.isQualityOpen ?
+          <MenuItem 
+          style={this.state.clickedItem === "NewIssueRecord" ? { backgroundColor: "#B9CCEC" } : {}}
+          className={classes.nested} component={Link} to="/new-issue-record" exact
+          onClick={this.clickNewIssueRecord.bind(this)} >
             <ListItemIcon>
-              <CustomerIcon />
+              <PlusIcon />
             </ListItemIcon>
-            <ListItemText primary="Customers" />
+            <ListItemText className={classes.nestedText} primary="New Issue Record" />
           </MenuItem>
           :
           <Divider />
         }
 
-        <MenuItem key = {4} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+        <MenuItem className={classes.menuItem} onClick={this.clickProject.bind(this)} >
+          <ListItemIcon>
+            <ProjectIcon />
+          </ListItemIcon>
+          <ListItemText primary="Projects" />
+          <ListItemIcon style={this.state.isProjectOpen ? { transform: 'rotate(90deg)' } : {}} >
+            <NextIcon />
+          </ListItemIcon>
+        </MenuItem>
+        {this.state.isProjectOpen ?
+          <MenuItem  className={classes.nested} component={Link} to="/" exact >
+            <ListItemIcon>
+              <CustomerIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.nestedText} primary="Customers" />
+          </MenuItem>
+          :
+          <Divider />
+        }
+
+        <MenuItem className={classes.menuItem} >
           <ListItemIcon>
             <ReportIcon />
           </ListItemIcon>
           <ListItemText primary="Reports" />
         </MenuItem>
         <Divider />
-        <MenuItem key = {5} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+        <MenuItem key={5} className={classes.menuItem} >
           <ListItemIcon>
             <SettingIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </MenuItem>
-        <MenuItem key = {6} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+        <MenuItem key={6} className={classes.menuItem} >
           <ListItemIcon>
             <AdminIcon />
           </ListItemIcon>
           <ListItemText primary="Administration" />
         </MenuItem>
-        <MenuItem key = {7} className={classes.menuItem} component={Link} to="/login" exact onClick={this.clickHandler.bind(this)} >
+        <MenuItem key={7} className={classes.menuItem} >
           <ListItemIcon>
             <ProfileIcon />
           </ListItemIcon>
