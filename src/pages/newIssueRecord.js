@@ -10,6 +10,7 @@ import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import { getButtonList } from "../actions";
+import { Divider } from "../../node_modules/@material-ui/core";
 
 const styles = theme => ({
   container: {
@@ -243,10 +244,12 @@ class Quality extends React.Component {
           </Paper>
         </div>
 
+        { this.props.isNewRecord ?
         <Paper
           className={classes.root}
           elevation={0}
           style={{ width: "83.5%" }}
+          visibility = {false}
         >
           <div>
             <div style={{ display: "flex" }}>
@@ -359,6 +362,9 @@ class Quality extends React.Component {
             </div>
           </div>
         </Paper>
+      :
+      <Divider />
+      }
       </div>
     );
   }
