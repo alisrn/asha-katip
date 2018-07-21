@@ -30,9 +30,12 @@ const styles = theme => ({
     'appBarShift-right': {
         marginRight: drawerWidth,
     },
+    button: {
+        margin: theme.spacing.unit * 3 ,
+      },
 });
 
-class ActionBar extends React.Component {
+class ActionBar extends Component {
     constructor(props, theme) {
         super(props);
         this.store = this.props.store;
@@ -50,7 +53,7 @@ class ActionBar extends React.Component {
                 style={{ paddingTop: 70, zIndex: 0, backgroundColor: "#eaeaea" }}
             >
                 <Toolbar variant="dense" disableGutters={!open} style={{ height: 5, backgroundColor: "#ffff" }} >
-                    <Button variant="dense" size="small" color="primary" className={classes.button}>
+                    <Button variant="outlined" size="small" color="primary" className={classes.button}>
                         Save
              <SaveIcon className={classes.rightIcon} />
                     </Button>

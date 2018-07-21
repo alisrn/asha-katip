@@ -99,9 +99,7 @@ const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit,
   },
-  button: {
-    margin: theme.spacing.unit,
-  },
+
 });
 
 class Layout extends Component {
