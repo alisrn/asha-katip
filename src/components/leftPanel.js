@@ -20,7 +20,7 @@ import NextIcon from '@material-ui/icons/NavigateNext';
 const styles = theme => ({
   menuItem: {
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: "#B9CCEC",
       '& $primary, & $icon': {
         color: theme.palette.common.white,
       },
@@ -29,7 +29,7 @@ const styles = theme => ({
   nested: {
     paddingLeft: theme.spacing.unit * 4,
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: "#B9CCEC",
       '& $primary, & $icon': {
         color: theme.palette.common.white,
       },
@@ -43,46 +43,72 @@ class mailFolderListItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      isHomeOpen: false,
+      isQualityOpen: false,
+      isProjectOpen: false,
+      isReportOpen: false,
+      isAdminOpen: false,
+      isSettingOpen: false,
+      clickedItem: ""
     }
   }
 
 
-  clickHandler = () => {
-    this.setState(state => ({
-      open: !state.open
-    }))
+  clickHandler = (e) => {
+    switch (e.target.innerText) {
+      case "Home":
+        this.setState(state => ({
+          isHomeOpen: !state.isHomeOpen
+        }))
+
+      case "Quality Track":
+        this.setState(state => ({
+          isQualityOpen: !state.isQualityOpen
+        }))
+
+      case "Projects":
+        this.setState(state => ({
+          isProjectOpen: !state.isProjectOpen
+        }))
+
+      case "Reports":
+        this.setState(state => ({
+          isReportOpen: !state.isReportOpen
+        }))
+
+      case "Settings":
+        this.setState(state => ({
+          isAdminOpen: !state.isAdminOpen
+        }))
+
+      case "Administration":
+        this.setState(state => ({
+          isSettingOpen: !state.isSettingOpen
+        }))
+
+      default:
+        break;
+    };
+    this.setState({
+      clickedItem: e.target.innerText
+    })
+
   }
+
 
   render() {
     const { classes } = this.props;
     return (
 
       < MenuList>
-        <MenuItem className={classes.menuItem} component={Link} to="/" exact >
-          <ListItemIcon>
+        <MenuItem key = {1} className={classes.menuItem} component={Link} to="/" exact onClick={this.clickHandler.bind(this)} >
+          <ListItemIcon id={1} >
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText id={1} primary="Home" style = {{zIndex:2, width:"100%"}}/>
         </MenuItem>
-
-        <MenuItem className={classes.menuItem} component={Link} to="/quality" exact >
-          <ListItemIcon>
-            <TrackIcon />
-          </ListItemIcon>
-          <ListItemText primary="Quality Track" />
-        </MenuItem>
-        <MenuItem className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
-          <ListItemIcon>
-            <ProjectIcon />
-          </ListItemIcon>
-          <ListItemText primary="Projects" />
-          <ListItemIcon style={this.state.open ? { transform: 'rotate(90deg)' } : {}} >
-            <NextIcon />
-          </ListItemIcon>
-        </MenuItem>
-        {this.state.open ?
-          <MenuItem className={classes.nested} component={Link} to="/" exact >
+        {this.state.isHomeOpen ?
+          <MenuItem name = "as" className={classes.nested} component={Link} to="/" exact >
             <ListItemIcon>
               <CustomerIcon />
             </ListItemIcon>
@@ -92,26 +118,62 @@ class mailFolderListItems extends React.Component {
           <Divider />
         }
 
-        <MenuItem className={classes.menuItem}>
+        <MenuItem key = {2} className={classes.menuItem} component={Link} to="/quality" exact onClick={this.clickHandler.bind(this)} >
+          <ListItemIcon>
+            <TrackIcon />
+          </ListItemIcon>
+          <ListItemText primary="Quality Track" />
+        </MenuItem>
+        {this.state.isQualityOpen ?
+          <MenuItem name = "dsa" className={classes.nested} component={Link} to="/" exact >
+            <ListItemIcon>
+              <CustomerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Customers" />
+          </MenuItem>
+          :
+          <Divider />
+        }
+        <MenuItem key = {3} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+          <ListItemIcon>
+            <ProjectIcon />
+          </ListItemIcon>
+          <ListItemText primary="Projects" />
+          <ListItemIcon style={this.state.open ? { transform: 'rotate(90deg)' } : {}} >
+            <NextIcon />
+          </ListItemIcon>
+        </MenuItem>
+        {this.state.isProjectOpen ?
+          <MenuItem name = "asdasd" className={classes.nested} component={Link} to="/" exact >
+            <ListItemIcon>
+              <CustomerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Customers" />
+          </MenuItem>
+          :
+          <Divider />
+        }
+
+        <MenuItem key = {4} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <ReportIcon />
           </ListItemIcon>
           <ListItemText primary="Reports" />
         </MenuItem>
         <Divider />
-        <MenuItem className={classes.menuItem}>
+        <MenuItem key = {5} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <SettingIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </MenuItem>
-        <MenuItem className={classes.menuItem} >
+        <MenuItem key = {6} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <AdminIcon />
           </ListItemIcon>
           <ListItemText primary="Administration" />
         </MenuItem>
-        <MenuItem className={classes.menuItem} component={Link} to="/login" exact >
+        <MenuItem key = {7} className={classes.menuItem} component={Link} to="/login" exact onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <ProfileIcon />
           </ListItemIcon>

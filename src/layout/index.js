@@ -27,16 +27,9 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     },
-  appFrame: {
-    height: 430,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-  },
   appBar: {
     position: 'absolute',
+    backgroundColor: "#2A4F6E",
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -165,7 +158,7 @@ class Layout extends Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography >
+              <Typography  variant="title" color="inherit" noWrap>
                 ASHA KATIP
               </Typography>
             </Toolbar>
