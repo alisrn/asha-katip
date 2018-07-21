@@ -5,6 +5,7 @@ import Home from '../pages/home';
 import Login from '../pages/login';
 import Signup from '../pages/signup';
 import NewIssueRecord from '../pages/newIssueRecord';
+import QualityIssueList from '../pages/qualityIssueList';
 import PartNumber from '../components/part';
 
 class Routes extends React.Component {
@@ -28,6 +29,12 @@ class Routes extends React.Component {
               exact
               path="/new-issue-record"
               render={props => <NewIssueRecord {...props} store={this.store} />}
+            />
+
+            <Route
+              exact
+              path="/quality-issue-list"
+              render={props => <QualityIssueList {...props} store={this.store} />}
             />
 
             <Route

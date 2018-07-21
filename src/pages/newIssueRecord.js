@@ -4,6 +4,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import PartNo from "../components/part";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+import SaveIcon from '@material-ui/icons/Save';
+import classNames from 'classnames';
+
+
 
 const styles = theme => ({
   container: {
@@ -24,9 +30,11 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     display: "flex"
-  }
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 });
-
 
 const customer = [
   {
@@ -97,7 +105,7 @@ class Quality extends React.Component {
     return (
       <Paper className={classes.root} elevation={1}>
         <div>
-          <div style={{ display: "flex" }} >
+          <div style={{ display: "flex" }}>
             <TextField
               id="customer"
               select
@@ -144,7 +152,7 @@ class Quality extends React.Component {
 
             <PartNo />
           </div>
-          <div style={{ display: "flex" }} >
+          <div style={{ display: "flex" }}>
             <TextField
               id="location"
               select
@@ -195,8 +203,17 @@ class Quality extends React.Component {
             margin="normal"
           />
         </div>
+
+        <div>
+          <Button variant="contained" color="primary" className={classes.button}>
+            <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+            Save
+          </Button>
+        </div>
+        
       </Paper>
     );
+    
   }
 }
 
