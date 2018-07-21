@@ -95,9 +95,8 @@ class Quality extends React.Component {
 
     return (
       <Paper className={classes.root} elevation={1}>
-
-      <div>  
-        <TextField
+        <div>
+          <TextField
             id="customer"
             select
             label="Customer"
@@ -162,7 +161,7 @@ class Quality extends React.Component {
               </MenuItem>
             ))}
           </TextField>
-        
+
           <div style={{ display: "flex", verticalAlign: "Center" }}>
             <form className={classes.container} noValidate>
               <TextField
@@ -170,31 +169,32 @@ class Quality extends React.Component {
                 label="Problem Date"
                 type="date"
                 defaultValue="2017-01-01"
+                helperText="Please select problem date"
+                margin="normal"
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
                 }}
               />
             </form>
-            <PartNo />
+            <PartNo 
+            />
           </div>
-
         </div>
 
-        <div> 
-            <TextField
-          id="description"
-          label="Description"
-          multiline
-          rows="4"
-          defaultValue=""
-          className={classes.textField}
-          margin="normal"
-        />
+        <div>
+          <TextField
+            id="description"
+            label="Description"
+            multiline
+            rows="4"
+            defaultValue=""
+            className={classes.textField}
+            helperText="Please enter description"
+            margin="normal"
+          />
         </div>
-
-        </Paper>
-      
+      </Paper>
     );
   }
 }

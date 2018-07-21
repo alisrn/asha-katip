@@ -27,6 +27,8 @@ function renderInput(inputProps) {
         },
         ...other
       }}
+      helperText="Please enter part number"
+      margin="normal"
     />
   );
 }
@@ -92,6 +94,7 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: "relative",
+    marginLeft: 15
     //height: 250
   },
   suggestionsContainerOpen: {
@@ -100,7 +103,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     left: 0,
     right: 0,
-    width: 250
+    width: 250,
   },
   suggestion: {
     display: "block"
@@ -111,7 +114,8 @@ const styles = theme => ({
     listStyleType: "none"
   },
   input:{
-    width: 250
+    width: 200,
+   
   }
 });
 
