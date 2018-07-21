@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import  Divider  from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import MailFolderListItems from '../components/leftPanel';
+import ActionBar from '../components/actionBar'
 
 const drawerWidth = 240;
 
@@ -26,7 +27,7 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    },
+  },
   appBar: {
     position: 'absolute',
     backgroundColor: "#2A4F6E",
@@ -48,6 +49,7 @@ const styles = theme => ({
   'appBarShift-right': {
     marginRight: drawerWidth,
   },
+
   menuButton: {
     marginLeft: 12,
     marginRight: 20,
@@ -69,6 +71,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
+    paddingTop: theme.spacing.unit * 10,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -92,6 +95,12 @@ const styles = theme => ({
   },
   'contentShift-right': {
     marginRight: 0,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
@@ -136,7 +145,7 @@ class Layout extends Component {
           </IconButton>
         </div>
         <Divider />
-          <MailFolderListItems />
+        <MailFolderListItems />
       </Drawer>
     );
 
@@ -144,25 +153,26 @@ class Layout extends Component {
 
     return (
       <div className={classes.root} >
-          <AppBar className={classNames(classes.appBar, {
-            [classes.appBarShift]: open,
-            [classes[`appBarShift-${anchor}`]]: open,
-          })}
-          >
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography  variant="title" color="inherit" noWrap>
-                ASHA KATIP
+        <AppBar className={classNames(classes.appBar, {
+          [classes.appBarShift]: open,
+          [classes[`appBarShift-${anchor}`]]: open,
+        })}
+        >
+          <Toolbar disableGutters={!open}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerOpen}
+              className={classNames(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              ASHA KATIP
               </Typography>
-            </Toolbar>
-          </AppBar>
+          </Toolbar>
+        </AppBar>
+        <ActionBar anchor={anchor} open = {open} />
         {right}
         <main className={classNames(classes.content, classes[`content-${anchor}`], {
           [classes.contentShift]: open,
