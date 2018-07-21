@@ -8,7 +8,8 @@ const initialState = {
     angular: 0,
     react: 0,
     vuejs: 0,
-    buttonList:null
+    buttonList: null,
+    isNewRecord: false
 }
 
 export default (state = initialState, action) => {
@@ -31,6 +32,11 @@ export default (state = initialState, action) => {
         case 'BUTTON_LIST':
             return Object.assign({}, state, {
                 buttonList: action.buttonList
+            })
+
+        case 'IS_NEW_RECORD':
+            return Object.assign({}, state, {
+                isNewRecord: action.isNewRecord
             })
 
         default:

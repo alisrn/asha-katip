@@ -17,6 +17,8 @@ import ProfileIcon from "@material-ui/icons/Person";
 import NextIcon from "@material-ui/icons/NavigateNext";
 import PlusIcon from "@material-ui/icons/Add";
 
+import {isNewRecord} from '../actions'
+
 const styles = theme => ({
   menuItem: {
     "&:focus": {
@@ -46,6 +48,7 @@ const styles = theme => ({
 class mailFolderListItems extends React.Component {
   constructor(props) {
     super(props);
+    this.store = this.props.stor;
     this.state = {
       isHomeOpen: false,
       isQualityOpen: false,
@@ -81,6 +84,7 @@ class mailFolderListItems extends React.Component {
     this.setState(state => ({
       clickedItem: "NewIssueRecord"
     }));
+    this.store.dispatch(isNewRecord(true))
   };
 
   clickQualityIssueList = () => {

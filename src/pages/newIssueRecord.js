@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
@@ -244,7 +244,7 @@ class Quality extends React.Component {
           </Paper>
         </div>
 
-        { this.props.isNewRecord ?
+        { this.store.getState().isNewRecord ?
         <Paper
           className={classes.root}
           elevation={0}
@@ -363,7 +363,7 @@ class Quality extends React.Component {
           </div>
         </Paper>
       :
-      <Divider />
+      <Fragment />
       }
       </div>
     );

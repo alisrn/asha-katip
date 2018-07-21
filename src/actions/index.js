@@ -41,3 +41,9 @@ export const getButtonList = (buttonList) =>{
         type: "BUTTON_LIST", buttonList
     }
 }
+
+export const isNewRecord = (isNewRecord) =>{
+    return{
+        type: "IS_NEW_RECORD", isNewRecord
+    }
+}

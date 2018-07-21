@@ -5,8 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import Button from "@material-ui/core/Button";
-import SaveIcon from '@material-ui/icons/Save';
-import ClearIcon from '@material-ui/icons/DeleteSweep';
+
 const drawerWidth = 215;
 
 const styles = theme => ({
