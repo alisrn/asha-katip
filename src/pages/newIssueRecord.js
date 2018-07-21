@@ -95,7 +95,7 @@ class Quality extends React.Component {
 
     return (
       <Paper className={classes.root} elevation={1}>
-        <div >
+        <div  >
           <TextField
             id="customer"
             select
@@ -142,6 +142,7 @@ class Quality extends React.Component {
 
           <PartNo />
             </div>
+
             <div>
           <TextField
             id="location"
