@@ -22,11 +22,12 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    display: "flex"
   }
 });
 
-const customers = [
+const customer = [
   {
     value: "1",
     label: "Ford"
@@ -93,12 +94,13 @@ class Quality extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <Paper className={classes.root} elevation={1}>
-          <TextField
+      <Paper className={classes.root} elevation={1}>
+
+      <div>  
+        <TextField
             id="customer"
             select
-            label="Customer Name"
+            label="Customer"
             className={classes.textField}
             value={this.state.customer}
             onChange={this.handleChange("customer")}
@@ -107,10 +109,10 @@ class Quality extends React.Component {
                 className: classes.menu
               }
             }}
-            helperText="Please select your customer"
+            helperText="Please select Customer"
             margin="normal"
           >
-            {customers.map(option => (
+            {customer.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -140,15 +142,6 @@ class Quality extends React.Component {
           </TextField>
 
           <TextField
-            id="description"
-            label="Description"
-            placeholder=""
-            multiline
-            className={classes.textField}
-            margin="normal"
-          />
-
-          <TextField
             id="prj"
             select
             label="Project"
@@ -169,26 +162,39 @@ class Quality extends React.Component {
               </MenuItem>
             ))}
           </TextField>
-          
-          <div style = {{ display : "flex", verticalAlign: "Center" }} >
-          
-          <form className={classes.container} noValidate>
-            <TextField
-              id="date"
-              label="Problem Date"
-              type="date"
-              defaultValue="2017-01-01"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-          </form>
-          <PartNo />
-
+        
+          <div style={{ display: "flex", verticalAlign: "Center" }}>
+            <form className={classes.container} noValidate>
+              <TextField
+                id="date"
+                label="Problem Date"
+                type="date"
+                defaultValue="2017-01-01"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </form>
+            <PartNo />
           </div>
+
+        </div>
+
+        <div> 
+            <TextField
+          id="description"
+          label="Description"
+          multiline
+          rows="4"
+          defaultValue=""
+          className={classes.textField}
+          margin="normal"
+        />
+        </div>
+
         </Paper>
-      </div>
+      
     );
   }
 }

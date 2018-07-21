@@ -19,7 +19,7 @@ function renderInput(inputProps) {
 
   return (
     <TextField
-      label="Select"
+      label="Part Number"
       InputProps={{
         inputRef: ref,
         classes: {
@@ -92,14 +92,15 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: "relative",
-    height: 250
+    //height: 250
   },
   suggestionsContainerOpen: {
     position: "absolute",
     zIndex: 1,
     marginTop: theme.spacing.unit,
     left: 0,
-    right: 0
+    right: 0,
+    width: 250
   },
   suggestion: {
     display: "block"
@@ -108,6 +109,9 @@ const styles = theme => ({
     margin: 0,
     padding: 0,
     listStyleType: "none"
+  },
+  input:{
+    width: 250
   }
 });
 
@@ -155,7 +159,7 @@ class IntegrationAutosuggest extends React.Component {
         renderSuggestion={renderSuggestion}
         inputProps={{
           classes,
-          placeholder: "Search",
+          placeholder: "Please enter Part number",
           value: this.state.value,
           onChange: this.handleChange
         }}
