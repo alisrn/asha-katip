@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../pages/home';
 import Login from '../pages/login';
 import Signup from '../pages/signup';
-import Quality from '../pages/quality';
+import NewIssueRecord from '../pages/newIssueRecord';
 import PartNumber from '../components/part';
 
 class Routes extends React.Component {
@@ -26,8 +26,8 @@ class Routes extends React.Component {
 
             <Route
               exact
-              path="/quality"
-              render={props => <Quality {...props} store={this.store} />}
+              path="/new-issue-record"
+              render={props => <NewIssueRecord {...props} store={this.store} />}
             />
 
             <Route
