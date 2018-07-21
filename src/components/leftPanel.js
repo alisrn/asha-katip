@@ -56,6 +56,7 @@ class mailFolderListItems extends React.Component {
 
   clickHandler = (e) => {
     switch (e.target.innerText) {
+      
       case "Home":
         this.setState(state => ({
           isHomeOpen: !state.isHomeOpen
@@ -113,15 +114,6 @@ class mailFolderListItems extends React.Component {
           </ListItemIcon>
           <ListItemText id={1} primary="Home" style = {{zIndex:2, width:"100%"}}/>
         </MenuItem>
-        {this.state.isHomeOpen ?
-          <MenuItem name = "as" className={classes.nested} component={Link} to="/" exact >
-            <ListItemIcon>
-              <CustomerIcon />
-            </ListItemIcon>
-            <ListItemText primary="Customers" />
-          </MenuItem>
-          :
-          <Divider />
         }
 
         <MenuItem key = {2} className={classes.menuItem} component={Link} to="/quality" exact onClick={this.clickHandler.bind(this)} >
@@ -131,7 +123,7 @@ class mailFolderListItems extends React.Component {
           <ListItemText primary="Quality Track" />
         </MenuItem>
 
-        <MenuItem className={classes.menuItem} component={Link} to="/part" exact >
+        <MenuItem className={classes.menuItem} component={Link} to="/part" exact onClick={this.clickHandler.bind(this)} >
           <ListItemIcon>
             <TrackIcon />
           </ListItemIcon>
