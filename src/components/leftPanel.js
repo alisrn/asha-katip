@@ -101,7 +101,7 @@ class mailFolderListItems extends React.Component {
           <Divider />
         }
 
-        <MenuItem butclassName={classes.menuItem}>
+        <MenuItem className={classes.menuItem}>
           <ListItemIcon>
             <ReportIcon />
           </ListItemIcon>
