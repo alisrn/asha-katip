@@ -71,7 +71,6 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    paddingTop: theme.spacing.unit * 10,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -169,13 +168,15 @@ class Layout extends Component {
               ASHA KATIP
             </Typography>
           </Toolbar>
-         </AppBar>
-         {this.store.getState().buttonList ? <ActionBar store={this.store} anchor={anchor} open={open} /> : <Divider/>}
+        </AppBar>
+        {this.store.getState().buttonList ? <ActionBar store={this.store} anchor={anchor} open={open} /> : <Divider />}
         {right}
         <main className={classNames(classes.content, classes[`content-${anchor}`], {
           [classes.contentShift]: open,
           [classes[`contentShift-${anchor}`]]: open,
-        })} >
+        })}
+          style={this.store.getState().buttonList ? { paddingTop: 70 } : { paddingTop: 30 }}
+        >
           <div className={classes.drawerHeader} />
           {children}
         </main>

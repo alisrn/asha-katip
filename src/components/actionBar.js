@@ -50,9 +50,16 @@ class ActionBar extends Component {
         const { classes, anchor, open } = this.props;
 
         const buttonDrawer = buttonList.map(function(item){
+            const MaterialIcon = ({icon})  => {
+                let resolved = require(`@material-ui/icons/${item.icon}`).default
+
+                if(!resolved)
+                    throw Error(`Could not find material-ui-icons/${item.icon}`)
+                return React.createElement(resolved)
+            }
             return <Button variant="outlined" size="small" color="primary" className={classes.button}>
             {item.name}
-            <SaveIcon className={classes.rightIcon} />
+            <MaterialIcon className={classes.rightIcon} />
             </Button>}
         )
 
@@ -65,18 +72,8 @@ class ActionBar extends Component {
             >
                 <Toolbar variant="dense" disableGutters={!open} style={{ height: 5, backgroundColor: "#ffff" }} >
                     <div className={classes.buttonList}>
-                        <Button variant="outlined" size="small" color="primary" className={classes.button}>
-                            Save
-                            <SaveIcon className={classes.rightIcon} />
-                        </Button>
-                        <Button variant="outlined" size="small" color="primary" className={classes.button}>
-                            Clean
-                            <ClearIcon className={classes.rightIcon} />
-                        </Button>
-
                         {buttonDrawer}
                     </div>
-
                 </Toolbar>
             </AppBar>
 

@@ -1,18 +1,22 @@
 import React from 'react';
 import { Typography } from '../../node_modules/@material-ui/core';
+import { getButtonList } from "../actions";
 
-class Home extends React.Component{
-    constructor(props){
+
+class Home extends React.Component {
+    constructor(props) {
         super(props);
         this.store = this.props.store;
     }
-
-    render(){
-        return(
+    componentWillMount = () => {
+        this.store.dispatch(getButtonList(null));
+    }
+    render() {
+        return (
             <div>
-                <Typography 
+                <Typography
                 >
-                Welcome to ASHA KATİP.
+                    Welcome to ASHA KATİP.
                 </Typography>
             </div>
         );
