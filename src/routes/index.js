@@ -5,8 +5,9 @@ import {
 
 import Home from '../pages/home';
 import Login from '../pages/login';
-import Customer from '../pages/customers';
 import Signup from '../pages/signup';
+import Quality from '../pages/quality';
+import PartNumber from '../pages/part'
 
 
 
@@ -19,18 +20,19 @@ class Routes extends React.Component {
     render() {
         return (
             <Switch>
-                {this.store.getState().isLoggedIn ?
+                {!this.store.getState().isLoggedIn ?
                     <Switch>
-                        <Route path="/quality" render={
-                            (props) => <h1>Quality Track</h1>
-                        } />
 
                         <Route exact path="/" render={
                             (props) => <Home {...props} store={this.store} />
                         } />
 
-                        <Route exact path="/customers" render={
-                            (props) => <Customer {...props} store={this.store} />
+                        <Route exact path="/quality" render={
+                            (props) => <Quality {...props} store={this.store} />
+                        } />
+
+                        <Route exact path="/Part" render={
+                            (props) => <PartNumber {...props} store={this.store} />
                         } />
 
                     </Switch>

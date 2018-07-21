@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Layout from './layout';
 import { BrowserRouter } from 'react-router-dom';
+import Layout from './layout';
 
 import Routes from './routes/index';
 
@@ -14,21 +14,20 @@ class App extends Component {
     return (
       <BrowserRouter>
         {
-          this.store.getState().isLoggedIn ?
-            <Layout>
+          !this.store.getState().isLoggedIn
+            ? <Layout>
               <Routes store={this.store} />
             </Layout>
-            :
-            
-            <div style={{
-              display: "flex",
+            :                        <div style={{
+              display: 'flex',
               flex: 1,
-              width: "100%",
-              height:"100%",
-              alignContent: "center",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
+              width: '100%',
+              height: '100%',
+              alignContent: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            >
               <Routes store={this.store} />
             </div>
         }
@@ -38,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;

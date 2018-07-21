@@ -10,7 +10,8 @@ class Home extends React.Component{
     render(){
         return(
             <div>
-                <Typography >
+                <Typography 
+                >
                 Welcome to ASHA KATİP.
                 </Typography>
             </div>

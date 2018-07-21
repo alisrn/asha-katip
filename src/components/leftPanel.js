@@ -124,6 +124,7 @@ class mailFolderListItems extends React.Component {
           </ListItemIcon>
           <ListItemText primary="Quality Track" />
         </MenuItem>
+<<<<<<< HEAD
         {this.state.isQualityOpen ?
           <MenuItem name = "dsa" className={classes.nested} component={Link} to="/" exact >
             <ListItemIcon>
@@ -135,6 +136,17 @@ class mailFolderListItems extends React.Component {
           <Divider />
         }
         <MenuItem key = {3} className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+=======
+
+        <MenuItem className={classes.menuItem} component={Link} to="/part" exact >
+          <ListItemIcon>
+            <TrackIcon />
+          </ListItemIcon>
+          <ListItemText primary="Part" />
+        </MenuItem>
+
+        <MenuItem className={classes.menuItem} onClick={this.clickHandler.bind(this)} >
+>>>>>>> c126905f6bdaf8554a255495910bf483b9fb0917
           <ListItemIcon>
             <ProjectIcon />
           </ListItemIcon>
