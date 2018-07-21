@@ -61,7 +61,7 @@ const location = [
   }
 ];
 
-const prj = [
+const project = [
   {
     value: "1",
     label: "IA"
@@ -81,7 +81,7 @@ class Quality extends React.Component {
     customer: "",
     location: "",
     description: "",
-    prj: ""
+    project: ""
   };
 
   handleChange = name => event => {
@@ -95,7 +95,7 @@ class Quality extends React.Component {
 
     return (
       <Paper className={classes.root} elevation={1}>
-        <div>
+        <div >
           <TextField
             id="customer"
             select
@@ -119,6 +119,31 @@ class Quality extends React.Component {
           </TextField>
 
           <TextField
+            id="project"
+            select
+            label="Project"
+            className={classes.textField}
+            value={this.state.project}
+            onChange={this.handleChange("project")}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+            helperText="Please select project name"
+            margin="normal"
+          >
+            {project.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <PartNo />
+            </div>
+            <div>
+          <TextField
             id="location"
             select
             label="Location"
@@ -140,46 +165,20 @@ class Quality extends React.Component {
             ))}
           </TextField>
 
-          <TextField
-            id="prj"
-            select
-            label="Project"
-            className={classes.textField}
-            value={this.state.prj}
-            onChange={this.handleChange("prj")}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            helperText="Please select project name"
-            margin="normal"
-          >
-            {prj.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <div style={{ display: "flex", verticalAlign: "Center" }}>
-            <form className={classes.container} noValidate>
-              <TextField
-                id="date"
-                label="Problem Date"
-                type="date"
-                defaultValue="2017-01-01"
-                helperText="Please select problem date"
-                margin="normal"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-            </form>
-            <PartNo 
+          <form className={classes.container} noValidate>
+            <TextField
+              id="date"
+              label="Problem Date"
+              type="date"
+              defaultValue=""
+              helperText="Please select problem date"
+              margin="normal"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true
+              }}
             />
-          </div>
+          </form>
         </div>
 
         <div>
