@@ -60,31 +60,37 @@ class mailFolderListItems extends React.Component {
         this.setState(state => ({
           isHomeOpen: !state.isHomeOpen
         }))
+        break;
 
       case "Quality Track":
         this.setState(state => ({
           isQualityOpen: !state.isQualityOpen
         }))
+        break;
 
       case "Projects":
         this.setState(state => ({
           isProjectOpen: !state.isProjectOpen
         }))
+        break;
 
       case "Reports":
         this.setState(state => ({
           isReportOpen: !state.isReportOpen
         }))
+        break;
 
       case "Settings":
         this.setState(state => ({
           isAdminOpen: !state.isAdminOpen
         }))
+        break;
 
       case "Administration":
         this.setState(state => ({
           isSettingOpen: !state.isSettingOpen
         }))
+        break;
 
       default:
         break;
