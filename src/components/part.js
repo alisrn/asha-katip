@@ -94,16 +94,16 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: "relative",
-    marginLeft: 15
-    //height: 250
-  },
+    marginLeft: 15,
+/*     height: 25 */ 
+ },
   suggestionsContainerOpen: {
     position: "absolute",
-    zIndex: 1,
-    marginTop: theme.spacing.unit,
+    zIndex: 2,
     left: 0,
     right: 0,
-    width: 250,
+    width: 150,
+    display: "flex"
   },
   suggestion: {
     display: "block"
@@ -114,8 +114,7 @@ const styles = theme => ({
     listStyleType: "none"
   },
   input:{
-    width: 200,
-   
+    width: 150,
   }
 });
 
@@ -163,7 +162,7 @@ class IntegrationAutosuggest extends React.Component {
         renderSuggestion={renderSuggestion}
         inputProps={{
           classes,
-          placeholder: "Please enter Part number",
+          /* placeholder: "Please enter Part number", */
           value: this.state.value,
           onChange: this.handleChange
         }}

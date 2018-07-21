@@ -5,22 +5,29 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import PartNo from "../components/part";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
-import SaveIcon from '@material-ui/icons/Save';
-import classNames from 'classnames';
-
-
+import SaveIcon from "@material-ui/icons/Save";
+import classNames from "classnames";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import Input from "@material-ui/core/Input";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const styles = theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
+
   textField: {
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: 200
+    width: 150
+  },
+  formControl: {
+    margin: theme.spacing.unit * 2,
+    minWidth: 150
   },
   menu: {
     width: 200
@@ -32,60 +39,16 @@ const styles = theme => ({
     display: "flex"
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
+    marginLeft: theme.spacing.unit
+  }
 });
-
-const customer = [
-  {
-    value: "1",
-    label: "Ford"
-  },
-  {
-    value: "2",
-    label: "Hyundai"
-  },
-  {
-    value: "3",
-    label: "Mobis"
-  },
-  {
-    value: "4",
-    label: "Isuzu"
-  },
-  {
-    value: "5",
-    label: "Agco"
-  }
-];
-
-const location = [
-  {
-    value: "1",
-    label: "Customer"
-  },
-  {
-    value: "2",
-    label: "Internal"
-  }
-];
-
-const project = [
-  {
-    value: "1",
-    label: "IA"
-  },
-  {
-    value: "2",
-    label: "GB"
-  }
-];
 
 class Quality extends React.Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
   }
+
   state = {
     customer: "",
     location: "",
@@ -103,98 +66,111 @@ class Quality extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Paper className={classes.root} elevation={1}>
-        <div>
-          <div style={{ display: "flex" }}>
-            <TextField
-              id="customer"
-              select
-              label="Customer"
-              className={classes.textField}
-              value={this.state.customer}
-              onChange={this.handleChange("customer")}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu
-                }
-              }}
-              helperText="Please select Customer"
-              margin="normal"
-            >
-              {customer.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+      <div style={{ display: "flex" }}>
+        <Paper className={classes.root} elevation={1} style={{ width: "60%" }}>
+          <div>
+            <div style={{ display: "flex", flex: 2 }}>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="customer">Customer</InputLabel>
+                <NativeSelect
+                  value={this.state.customer}
+                  onChange={this.handleChange("customer")}
+                  input={<Input name="customer" id="customer" />}
+                >
+                  <option value="" />
+                  <option value={10}>Hyundai</option>
+                  <option value={20}>Ford</option>
+                  <option value={30}>Mobis</option>
+                </NativeSelect>
+                <FormHelperText>Please select customer</FormHelperText>
+              </FormControl>
 
-            <TextField
-              id="project"
-              select
-              label="Project"
-              className={classes.textField}
-              value={this.state.project}
-              onChange={this.handleChange("project")}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu
-                }
-              }}
-              helperText="Please select project name"
-              margin="normal"
-            >
-              {project.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="project">Project</InputLabel>
+                <NativeSelect
+                  value={this.state.project}
+                  onChange={this.handleChange("project")}
+                  input={<Input name="project" id="project" />}
+                >
+                  <option value="" />
+                  <option value={10}>Hyundai Project</option>
+                  <option value={20}>Ford Project</option>
+                </NativeSelect>
+                <FormHelperText>Please select project</FormHelperText>
+              </FormControl>
 
-            <PartNo />
+              <PartNo />
+
+              <form className={classes.container} noValidate>
+                <TextField
+                  id="date"
+                  label="Problem Date"
+                  type="date"
+                  defaultValue=""
+                  helperText="Please select problem date"
+                  margin="normal"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </form>
+            </div>
+
+            <div style={{ display: "flex" }}>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="location">Location</InputLabel>
+                <NativeSelect
+                  value={this.state.location}
+                  onChange={this.handleChange("location")}
+                  input={<Input name="location" id="location" />}
+                >
+                  <option value="" />
+                  <option value={10}>Customer</option>
+                  <option value={20}>Internal</option>
+                </NativeSelect>
+                <FormHelperText>Please select location</FormHelperText>
+              </FormControl>
+
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grade">Grade</InputLabel>
+                <NativeSelect
+                  value={this.state.grade}
+                  onChange={this.handleChange("grade")}
+                  input={<Input name="grade" id="grade" />}
+                >
+                  <option value="" />
+                  <option value={10}>A</option>
+                  <option value={20}>B</option>
+                  <option value={30}>C</option>
+                </NativeSelect>
+                <FormHelperText>Please select grade</FormHelperText>
+              </FormControl>
+
+              <FormControl className={classes.formControl}>
+                <InputLabel style = {{ width: 250 }} htmlFor="Resp">Responsible Department</InputLabel>
+                <NativeSelect
+                  style = {{ width: 250}}
+                  value={this.state.resp}
+                  onChange={this.handleChange("resp")}
+                  input={<Input name="resp" id="resp" />}
+                >
+                  <option value="" />
+                  <option value={10}>ASHA1</option>
+                  <option value={20}>ASHA2</option>
+                  <option value={30}>STA</option>
+                </NativeSelect>
+                <FormHelperText>Please select grade</FormHelperText>
+              </FormControl>
+            </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <TextField
-              id="location"
-              select
-              label="Location"
-              className={classes.textField}
-              value={this.state.location}
-              onChange={this.handleChange("location")}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu
-                }
-              }}
-              helperText="Please select location"
-              margin="normal"
-            >
-              {location.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+        </Paper>
 
-            <form className={classes.container} noValidate>
-              <TextField
-                id="date"
-                label="Problem Date"
-                type="date"
-                defaultValue=""
-                helperText="Please select problem date"
-                margin="normal"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-            </form>
-          </div>
-        </div>
-        <div>
+        <Paper className={classes.root} elevation={1} style={{ width: "20%" }}>
           <TextField
             id="description"
             label="Description"
+            style={{ width: 500 }}
             multiline
             rows="4"
             defaultValue=""
@@ -202,18 +178,9 @@ class Quality extends React.Component {
             helperText="Please enter description"
             margin="normal"
           />
-        </div>
-
-        <div>
-          <Button variant="contained" color="primary" className={classes.button}>
-            <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-            Save
-          </Button>
-        </div>
-        
-      </Paper>
+        </Paper>
+      </div>
     );
-    
   }
 }
 
