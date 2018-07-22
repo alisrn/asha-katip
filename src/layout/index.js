@@ -1,104 +1,103 @@
-import React, { Component } from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import Drawer from "@material-ui/core/Drawer";
+import AppBar from "@material-ui/core/AppBar";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import Toolbar from "@material-ui/core/Toolbar";
+import classNames from "classnames";
 
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-import MailFolderListItems from '../components/leftPanel';
-import ActionBar from '../components/actionBar'
+import MailFolderListItems from "../components/leftPanel";
+import ActionBar from "../components/actionBar";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '100%',
+    height: "100%",
     zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
+    overflow: "hidden",
+    position: "relative",
+    display: "flex"
   },
   appBar: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: "#2A4F6E",
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
-  'appBarShift-left': {
-    marginLeft: drawerWidth,
+  "appBarShift-left": {
+    marginLeft: drawerWidth
   },
-  'appBarShift-right': {
-    marginRight: drawerWidth,
+  "appBarShift-right": {
+    marginRight: drawerWidth
   },
 
   menuButton: {
     marginLeft: 12,
-    marginRight: 20,
+    marginRight: 20
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar
   },
   drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
+    position: "relative",
+    width: drawerWidth
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
-  'content-left': {
-    marginLeft: -drawerWidth,
+  "content-left": {
+    marginLeft: -drawerWidth
   },
-  'content-right': {
-    marginRight: -drawerWidth,
+  "content-right": {
+    marginRight: -drawerWidth
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
-  'contentShift-left': {
-    marginLeft: 0,
+  "contentShift-left": {
+    marginLeft: 0
   },
-  'contentShift-right': {
-    marginRight: 0,
+  "contentShift-right": {
+    marginRight: 0
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-
+    marginLeft: theme.spacing.unit
+  }
 });
 
 class Layout extends Component {
@@ -107,7 +106,7 @@ class Layout extends Component {
     this.store = this.props.store;
     this.state = {
       open: false,
-      anchor: 'left',
+      anchor: "left"
     };
   }
   handleDrawerOpen = () => {
@@ -120,7 +119,7 @@ class Layout extends Component {
 
   handleChangeAnchor = event => {
     this.setState({
-      anchor: event.target.value,
+      anchor: event.target.value
     });
   };
   render() {
@@ -133,7 +132,7 @@ class Layout extends Component {
         anchor={anchor}
         open={open}
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
         <div className={classes.drawerHeader}>
@@ -149,11 +148,12 @@ class Layout extends Component {
     let right = drawer;
 
     return (
-      <div className={classes.root} >
-        <AppBar className={classNames(classes.appBar, {
-          [classes.appBarShift]: open,
-          [classes[`appBarShift-${anchor}`]]: open,
-        })}
+      <div className={classes.root}>
+        <AppBar
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: open,
+            [classes[`appBarShift-${anchor}`]]: open
+          })}
         >
           <Toolbar disableGutters={!open}>
             <IconButton
@@ -169,29 +169,37 @@ class Layout extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        {this.store.getState().buttonList ? <ActionBar store={this.store} anchor={anchor} open={open} /> : <Divider />}
+        {this.store.getState().buttonList ? (
+          <ActionBar store={this.store} anchor={anchor} open={open} />
+        ) : (
+          <Divider />
+        )}
         {right}
-        <main className={classNames(classes.content, classes[`content-${anchor}`], {
-          [classes.contentShift]: open,
-          [classes[`contentShift-${anchor}`]]: open,
-        })}
-          style={this.store.getState().buttonList ? { paddingTop: 70 } : { paddingTop: 30 }}
+        <main
+          className={classNames(classes.content, classes[`content-${anchor}`], {
+            [classes.contentShift]: open,
+            [classes[`contentShift-${anchor}`]]: open
+          })}
+          style={
+            this.store.getState().buttonList
+              ? { paddingTop: 70 }
+              : { paddingTop: 30 }
+          }
         >
           <div className={classes.drawerHeader} />
           {children}
         </main>
       </div>
-
     );
   }
 }
 
 Layout.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
 
 export default compose(
   withRouter,
-  withStyles(styles, { withTheme: true }),
-)(Layout)
+  withStyles(styles, { withTheme: true })
+)(Layout);
