@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import swal from 'sweetalert';
 
 import { getButtonList } from "../actions";
 
@@ -54,6 +55,42 @@ class Quality extends React.Component {
     this.isNewRecord = (this.store.getState().isNewRecord);
   }
 
+  onSaveClick = () => {
+    fetch("http://asha-katip.azurewebsites.net/api/issue", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+
+        "Customer_Id": this.state.Customer_Id,
+        "Project_Id": this.state.Project_Id,
+        "Partnumber_Id": 1,
+        "Problem_Date": "01-01-2018",
+        "Description": "ilk deneme",
+        "Location_Id": 1,
+        "Grade_Id": "A",
+        "Resp_Dept_Id": 1,
+        "Request_Date": "01-01-2018",
+        "Target_Date": "01-01-2018",
+        "Qty_In_1_Month": 1,
+        "Qty_In_3_Month": 2,
+        "Insert_User_Id": 1
+      })
+    })
+      .then((response) => response.json()
+      )
+      .then(response => {
+        if (response.ok) {
+          swal("Login successful.", "Kayıt işlemi başarılı!", "success")
+        } else {
+          this.setState({ loginClicked: false })
+          swal(response.message, "Kayıt işlemi gerçekleştirilemedi!", "error");
+        }
+
+      }
+      )
+
+  }
+
   state = {
     customer: "",
     location: "",
@@ -61,9 +98,9 @@ class Quality extends React.Component {
     project: ""
   };
 
-  handleChange = name => event => {
+  onChangeHandler = e => {
     this.setState({
-      [name]: event.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -79,18 +116,20 @@ class Quality extends React.Component {
             style={{ width: "60%" }}
           >
             <div>
+              <button onClick={this.onSaveClick} >Save</button>
               <div style={{ display: "flex", flex: 2 }}>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="customer">Customer</InputLabel>
+                  <InputLabel htmlFor="Customer_Id">Customer</InputLabel>
                   <NativeSelect
-                    value={this.state.customer}
-                    onChange={this.handleChange("customer")}
-                    input={<Input name="customer" id="customer" />}
+                    name = "Customer_Id"
+                    value={this.state.Customer_Id}
+                    onChange={e => this.onChangeHandler(e)}
+                    input={<Input name="Customer_Id" id="Customer_Id" />}
                   >
                     <option value="" />
-                    <option value={10}>Hyundai</option>
-                    <option value={20}>Ford</option>
-                    <option value={30}>Mobis</option>
+                    <option value={1}>Hyundai</option>
+                    <option value={2}>Ford</option>
+                    <option value={3}>Mobis</option>
                   </NativeSelect>
                   <FormHelperText>Please select customer</FormHelperText>
                 </FormControl>
@@ -98,8 +137,9 @@ class Quality extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="project">Project</InputLabel>
                   <NativeSelect
-                    value={this.state.project}
-                    onChange={this.handleChange("project")}
+                    name = "Project_Id"
+                    onChange={e => this.onChangeHandler(e)}
+                    value={this.state.Project_Id}
                     input={<Input name="project" id="project" />}
                   >
                     <option value="" />
@@ -132,7 +172,6 @@ class Quality extends React.Component {
                   <InputLabel htmlFor="location">Location</InputLabel>
                   <NativeSelect
                     value={this.state.location}
-                    onChange={this.handleChange("location")}
                     input={<Input name="location" id="location" />}
                   >
                     <option value="" />
@@ -146,7 +185,6 @@ class Quality extends React.Component {
                   <InputLabel htmlFor="grade">Grade</InputLabel>
                   <NativeSelect
                     value={this.state.grade}
-                    onChange={this.handleChange("grade")}
                     input={<Input name="grade" id="grade" />}
                   >
                     <option value="" />
@@ -164,7 +202,6 @@ class Quality extends React.Component {
                   <NativeSelect
                     style={{ width: 250 }}
                     value={this.state.resp}
-                    onChange={this.handleChange("resp")}
                     input={<Input name="resp" id="resp" />}
                   >
                     <option value="" />
@@ -196,7 +233,6 @@ class Quality extends React.Component {
                   id="qty1"
                   label="Q'ty of Last Month"
                   value={this.state.qty1}
-                  onChange={this.handleChange("qty1")}
                   type="normal"
                   defaultValue="1"
                   helperText="Please select quantity"
@@ -211,7 +247,6 @@ class Quality extends React.Component {
                   id="qty2"
                   label="Q'ty of Last 3 Month"
                   value={this.state.qty2}
-                  onChange={this.handleChange("qty2")}
                   type="number"
                   defaultValue="1"
                   helperText="Please select quantity"
@@ -237,133 +272,131 @@ class Quality extends React.Component {
               multiline
               rowsMax="13"
               value={this.state.description}
-              onChange={this.handleChange("description")}
               className={classes.textField}
               margin="normal"
             />
           </Paper>
         </div>
 
-        { this.isNewRecord ?
-        <Paper
-          className={classes.root}
-          elevation={0}
-          style={{ width: "83.5%" }}
-        >
-          <div>
-            <div style={{ display: "flex" }}>
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="RecvDate1"
-                  label="Receive Date-1"
-                  type="date"
-                  defaultValue=""
-                  helperText="Please select receive date"
-                  margin="normal"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </form>
-
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="RecvDate2"
-                  label="Receive Date-2"
-                  type="date"
-                  defaultValue=""
-                  helperText="Please select receive date"
-                  margin="normal"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </form>
-
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="RecvDate3"
-                  label="Receive Date-3"
-                  type="date"
-                  defaultValue=""
-                  helperText="Please select receive date"
-                  margin="normal"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </form>
-
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="SCustDate"
-                  label="Sending Date"
-                  type="date"
-                  defaultValue=""
-                  helperText="Please select sending date"
-                  margin="normal"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </form>
-
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="Awaiting"
-                  label="Awaiting Date"
-                  type="date"
-                  defaultValue=""
-                  helperText="Please select awaiting date"
-                  margin="normal"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </form>
-            </div>
-
+        {this.isNewRecord ?
+          <Paper
+            className={classes.root}
+            elevation={0}
+            style={{ width: "83.5%" }}
+          >
             <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel style={{ width: 250 }} htmlFor="dupdate">
-                  Document Update
-                </InputLabel>
-                <NativeSelect
-                  style={{ width: 250 }}
-                  value={this.state.dupdate}
-                  onChange={this.handleChange("dupdate")}
-                  input={<Input name="DocumentUpdate" id="dupdate" />}
-                >
-                  <option value="" />
-                  <option value={10}>YES</option>
-                  <option value={20}>NO</option>
-                </NativeSelect>
-                <FormHelperText>Please select document update</FormHelperText>
-              </FormControl>
+              <div style={{ display: "flex" }}>
+                <form className={classes.container} noValidate>
+                  <TextField
+                    id="RecvDate1"
+                    label="Receive Date-1"
+                    type="date"
+                    defaultValue=""
+                    helperText="Please select receive date"
+                    margin="normal"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </form>
 
-              <TextField
-                id="multiline-static"
-                label="Document Update Description"
-                multiline
-                style={{ width: 500 }}
-                helperText="Please enter document update description"
-                rows="4"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-              />
-              
+                <form className={classes.container} noValidate>
+                  <TextField
+                    id="RecvDate2"
+                    label="Receive Date-2"
+                    type="date"
+                    defaultValue=""
+                    helperText="Please select receive date"
+                    margin="normal"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </form>
+
+                <form className={classes.container} noValidate>
+                  <TextField
+                    id="RecvDate3"
+                    label="Receive Date-3"
+                    type="date"
+                    defaultValue=""
+                    helperText="Please select receive date"
+                    margin="normal"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </form>
+
+                <form className={classes.container} noValidate>
+                  <TextField
+                    id="SCustDate"
+                    label="Sending Date"
+                    type="date"
+                    defaultValue=""
+                    helperText="Please select sending date"
+                    margin="normal"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </form>
+
+                <form className={classes.container} noValidate>
+                  <TextField
+                    id="Awaiting"
+                    label="Awaiting Date"
+                    type="date"
+                    defaultValue=""
+                    helperText="Please select awaiting date"
+                    margin="normal"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </form>
+              </div>
+
+              <div>
+                <FormControl className={classes.formControl}>
+                  <InputLabel style={{ width: 250 }} htmlFor="dupdate">
+                    Document Update
+                </InputLabel>
+                  <NativeSelect
+                    style={{ width: 250 }}
+                    value={this.state.dupdate}
+                    input={<Input name="DocumentUpdate" id="dupdate" />}
+                  >
+                    <option value="" />
+                    <option value={10}>YES</option>
+                    <option value={20}>NO</option>
+                  </NativeSelect>
+                  <FormHelperText>Please select document update</FormHelperText>
+                </FormControl>
+
+                <TextField
+                  id="multiline-static"
+                  label="Document Update Description"
+                  multiline
+                  style={{ width: 500 }}
+                  helperText="Please enter document update description"
+                  rows="4"
+                  defaultValue=""
+                  className={classes.textField}
+                  margin="normal"
+                />
+
+              </div>
             </div>
-          </div>
-        </Paper>
-      :
-      <Fragment />
-      }
+          </Paper>
+          :
+          <Fragment />
+        }
       </div>
     );
   }
