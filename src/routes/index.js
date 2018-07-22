@@ -45,7 +45,12 @@ class Routes extends React.Component {
           </Switch>
         ) : (
           <div>
-            <Redirect to="/login" />
+            {/* <Redirect to="/login" /> */}
+
+            <Route
+              render={props => <Login {...props} store={this.store} />}
+            />
+
             <Route
               path="/login"
               render={props => <Login {...props} store={this.store} />}

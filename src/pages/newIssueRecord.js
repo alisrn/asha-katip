@@ -51,6 +51,7 @@ class Quality extends React.Component {
 
   componentWillMount = () => {
     this.store.dispatch(getButtonList(this.buttonList));
+    this.isNewRecord = (this.store.getState().isNewRecord);
   }
 
   state = {
@@ -243,12 +244,11 @@ class Quality extends React.Component {
           </Paper>
         </div>
 
-        { this.store.getState().isNewRecord ?
+        { this.isNewRecord ?
         <Paper
           className={classes.root}
           elevation={0}
           style={{ width: "83.5%" }}
-          visibility = {false}
         >
           <div>
             <div style={{ display: "flex" }}>
