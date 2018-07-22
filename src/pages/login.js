@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -42,13 +42,17 @@ export default class Login extends React.Component {
             username: "",
             password: "",
             userInfo: {},
-            isLoggedIn: false
+            isLoggedIn: false,
+            loginClicked: false,
         }
         this.store = this.props.store;
         this.loginInfo = {};
     }
 
     onLoginClick = (e) => {
+        this.setState({
+            loginClicked: true
+        })
         fetch("http://asha-katip.azurewebsites.net/api/login", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -67,8 +71,11 @@ export default class Login extends React.Component {
                             this.store.dispatch(userLogin(response.ok))
                         )
 
-                } else
+                } else {
+                    this.setState({ loginClicked: false })
                     swal(response.message, "Username or password is wrong!", "error");
+                }
+
             }
             )
             .catch((error) => {
@@ -91,14 +98,21 @@ export default class Login extends React.Component {
             <Paper style={{
                 marginTop: 100,
             }} >
-                <div style={{alignContent:"center", alignItems:"center", zIndex:1}} >
-                    <CircularProgress style={{position:"absolute", marginTop: 200, marginLeft: 140}}/>
-                </div>
+                {
+                    this.state.loginClicked ?
+                        <div style={{ alignContent: "center", alignItems: "center", zIndex: 1 }} >
+                            <CircularProgress style={{ position: "absolute", marginTop: 200, marginLeft: 140 }} />
+                        </div>
+                        :
+                        <Fragment />
+                }
+
                 <div style={this.styles.containerPaper}>
                     <img style={this.styles.accountCircle} src={AccountCircle} alt="profile" />
                     <TextField style={this.styles.userItem}
                         name="username"
                         label="Username"
+                        disabled={this.state.loginClicked}
                         onChange={this.onChangeHandler.bind(this)}
                         value={this.state.username}
                     />
@@ -106,12 +120,14 @@ export default class Login extends React.Component {
                         name="password"
                         label="Password"
                         type="password"
+                        disabled={this.state.loginClicked}
                         onChange={e => this.onChangeHandler(e)}
                         value={this.state.password}
                     />
                     <Button style={this.styles.buttonItem}
                         size="large"
                         variant="raised"
+                        disabled={this.state.loginClicked}
                         color="primary"
                         onClick={this.onLoginClick.bind(this)}>
                         Login
@@ -119,6 +135,7 @@ export default class Login extends React.Component {
                     <Button
                         size="large"
                         variant="raised"
+                        disabled={this.state.loginClicked}
                         color="secondary"
                         onClick={this.onSignUpClick}
                         style={{ marginBottom: 55, marginTop: 30, width: 200 }}>
