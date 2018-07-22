@@ -142,7 +142,7 @@ class Layout extends Component {
           </IconButton>
         </div>
         <Divider />
-        <MailFolderListItems />
+        <MailFolderListItems store = {this.store}/>
       </Drawer>
     );
 
