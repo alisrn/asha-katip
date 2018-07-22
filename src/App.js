@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        {!this.store.getState().isLoggedIn ? (
+        {this.store.getState().isLoggedIn ? (
           <Layout store={this.store}>
             <Routes store={this.store} />
           </Layout>

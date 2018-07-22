@@ -64,9 +64,9 @@ class Quality extends React.Component {
         "Customer_Id": this.state.Customer_Id,
         "Project_Id": this.state.Project_Id,
         "Partnumber_Id": 1,
-        "Problem_Date": "01-01-2018",
+        "Problem_Date": this.state.Problem_Date,
         "Description": "ilk deneme",
-        "Location_Id": 1,
+        "Location_Id": this.state.Location_Id,
         "Grade_Id": "A",
         "Resp_Dept_Id": 1,
         "Request_Date": "01-01-2018",
@@ -121,7 +121,7 @@ class Quality extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="Customer_Id">Customer</InputLabel>
                   <NativeSelect
-                    name = "Customer_Id"
+                    name="Customer_Id"
                     value={this.state.Customer_Id}
                     onChange={e => this.onChangeHandler(e)}
                     input={<Input name="Customer_Id" id="Customer_Id" />}
@@ -135,16 +135,16 @@ class Quality extends React.Component {
                 </FormControl>
 
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="project">Project</InputLabel>
+                  <InputLabel htmlFor="Project_Id">Project</InputLabel>
                   <NativeSelect
-                    name = "Project_Id"
+                    name="Project_Id"
                     onChange={e => this.onChangeHandler(e)}
                     value={this.state.Project_Id}
-                    input={<Input name="project" id="project" />}
+                    input={<Input name="Project_Id" id="Project_Id" />}
                   >
                     <option value="" />
-                    <option value={10}>Hyundai Project</option>
-                    <option value={20}>Ford Project</option>
+                    <option value={1}>Hyundai Project</option>
+                    <option value={2}>Ford Project</option>
                   </NativeSelect>
                   <FormHelperText>Please select project</FormHelperText>
                 </FormControl>
@@ -159,6 +159,9 @@ class Quality extends React.Component {
                     defaultValue=""
                     helperText="Please select problem date"
                     margin="normal"
+                    onChange={e => this.onChangeHandler(e)}
+                    name="Problem_Date"
+                    value={this.state.Problem_Date}
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true
@@ -169,14 +172,16 @@ class Quality extends React.Component {
 
               <div style={{ display: "flex" }}>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="location">Location</InputLabel>
+                  <InputLabel htmlFor="Location_Id">Location</InputLabel>
                   <NativeSelect
-                    value={this.state.location}
-                    input={<Input name="location" id="location" />}
+                    value={this.state.Location_Id}
+                    onChange={e => this.onChangeHandler(e)}
+                    name="Location_Id"
+                    input={<Input name="Location_Id" id="Location_Id" />}
                   >
-                    <option value="" />
-                    <option value={10}>Customer</option>
-                    <option value={20}>Internal</option>
+                    <option value={0} />
+                    <option value={1}>Customer</option>
+                    <option value={2}>Internal</option>
                   </NativeSelect>
                   <FormHelperText>Please select location</FormHelperText>
                 </FormControl>
