@@ -17,7 +17,7 @@ class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        {!this.store.getState().isLoggedIn ? (
+        {this.store.getState().isLoggedIn ? (
           <Switch>
             <Route
               exact

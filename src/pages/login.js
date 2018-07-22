@@ -48,7 +48,7 @@ export default class Login extends React.Component {
     }
 
     onLoginClick = (e) => {
-        fetch("https://localhost:5001/api/login", {
+        fetch("http://asha-katip.azurewebsites.net/api/login", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
