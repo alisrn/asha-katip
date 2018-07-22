@@ -111,7 +111,7 @@ export default class signUpPage extends React.Component {
             "password": this.state.password
         };
 
-        fetch("https://localhost:5001/api/validation?username=" + newUserInfo.username + '&email=' + newUserInfo.email, {
+        fetch("http://asha-katip.azurewebsites.net/api/validation?username=" + newUserInfo.username + '&email=' + newUserInfo.email, {
             method: 'GET',
         })
             .then((result) => result.json())
@@ -119,7 +119,7 @@ export default class signUpPage extends React.Component {
                 if (!result.ok) {
                     swal("Error Occured!", result.message, "error");
                 } else {
-                    fetch("https://localhost:5001/api/signup", {
+                    fetch("http://asha-katip.azurewebsites.net/api/signup", {
                         method: 'POST',
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({

@@ -5,9 +5,6 @@ const initialState = {
     userInfo: {},
     activePage: "",
     isLoggedIn: false,
-    angular: 0,
-    react: 0,
-    vuejs: 0,
     buttonList: null,
     isNewRecord: false
 }
