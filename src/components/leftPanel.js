@@ -48,7 +48,7 @@ const styles = theme => ({
 class mailFolderListItems extends React.Component {
   constructor(props) {
     super(props);
-    this.store = this.props.stor;
+    this.store = this.props.store;
     this.state = {
       isHomeOpen: false,
       isQualityOpen: false,
