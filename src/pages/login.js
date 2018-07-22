@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import AccountCircle from '../assets/account_circle_grey.png'
 import swal from 'sweetalert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { userLogin } from '../actions';
 /* import AccountCircle from '../icons/account_circle_grey.png'
@@ -61,10 +62,10 @@ export default class Login extends React.Component {
             .then(response => {
                 if (response.ok) {
                     swal("Login successful.", "Welcome " + this.state.username + "!", "success")
-                    .then(this.props.history.push("/"))
-                    .then(
-                    this.store.dispatch(userLogin(response.ok))
-                    )
+                        .then(this.props.history.push("/"))
+                        .then(
+                            this.store.dispatch(userLogin(response.ok))
+                        )
 
                 } else
                     swal(response.message, "Username or password is wrong!", "error");
@@ -87,36 +88,44 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <Paper style={this.styles.containerPaper} >
-                <img style={this.styles.accountCircle} src={AccountCircle} alt="profile" />
-                <TextField style={this.styles.userItem}
-                    name="username"
-                    label="Username"
-                    onChange={this.onChangeHandler.bind(this)}
-                    value={this.state.username}
-                />
-                <TextField style={this.styles.passItem}
-                    name="password"
-                    label="Password"
-                    type="password"
-                    onChange={e => this.onChangeHandler(e)}
-                    value={this.state.password}
-                />
-                <Button style={this.styles.buttonItem}
-                    size="large"
-                    variant="raised"
-                    color="primary"
-                    onClick={this.onLoginClick.bind(this)}>
-                    Login
+            <Paper style={{
+                marginTop: 100,
+            }} >
+                <div style={{alignContent:"center", alignItems:"center", zIndex:1}} >
+                    <CircularProgress style={{position:"absolute", marginTop: 200, marginLeft: 140}}/>
+                </div>
+                <div style={this.styles.containerPaper}>
+                    <img style={this.styles.accountCircle} src={AccountCircle} alt="profile" />
+                    <TextField style={this.styles.userItem}
+                        name="username"
+                        label="Username"
+                        onChange={this.onChangeHandler.bind(this)}
+                        value={this.state.username}
+                    />
+                    <TextField style={this.styles.passItem}
+                        name="password"
+                        label="Password"
+                        type="password"
+                        onChange={e => this.onChangeHandler(e)}
+                        value={this.state.password}
+                    />
+                    <Button style={this.styles.buttonItem}
+                        size="large"
+                        variant="raised"
+                        color="primary"
+                        onClick={this.onLoginClick.bind(this)}>
+                        Login
                 </Button>
-                <Button
-                    size="large"
-                    variant="raised"
-                    color="secondary"
-                    onClick={this.onSignUpClick}
-                    style={{ marginBottom: 55, marginTop: 30, width: 200 }}>
-                    Sign Up
+                    <Button
+                        size="large"
+                        variant="raised"
+                        color="secondary"
+                        onClick={this.onSignUpClick}
+                        style={{ marginBottom: 55, marginTop: 30, width: 200 }}>
+                        Sign Up
                 </Button>
+                </div>
+
             </Paper>
         )
     }
