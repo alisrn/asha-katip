@@ -47,3 +47,9 @@ export const isNewRecord = (isNewRecord) =>{
         type: "IS_NEW_RECORD", isNewRecord
     }
 }
+
+export const actionBarClick = (name) => {
+    return{
+        type: 'ACTION_BAR_CLICK', name
+    }
+}

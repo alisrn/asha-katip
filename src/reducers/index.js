@@ -5,7 +5,8 @@ const initialState = {
   activePage: "",
   isLoggedIn: false,
   buttonList: null,
-  isNewRecord: false
+  isNewRecord: false,
+  actionClicked: ""
 };
 
 export default (state = initialState, action) => {
@@ -33,6 +34,11 @@ export default (state = initialState, action) => {
     case "IS_NEW_RECORD":
       return Object.assign({}, state, {
         isNewRecord: action.isNewRecord
+      });
+
+      case "ACTION_BAR_CLICK":
+      return Object.assign({}, state, {
+        actionClicked: action.name
       });
 
     default:

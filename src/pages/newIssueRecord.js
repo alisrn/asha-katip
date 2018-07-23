@@ -48,12 +48,37 @@ class Quality extends React.Component {
     this.store = this.props.store;
     this.buttonList = [{ name: "Save", icon: "Save" },
     { name: "Clean", icon: "DeleteSweep" }];
+
+    this.actionClicked="";
+    this.state={
+
+    };
   }
 
   componentWillMount = () => {
     this.store.dispatch(getButtonList(this.buttonList));
     this.isNewRecord = (this.store.getState().isNewRecord);
   }
+
+  componentWillUpdate = (nextProps) => {
+    if(this.actionClicked !== nextProps.store.getState().actionClicked){
+      switch(nextProps.store.getState().actionClicked){
+        case 'Save':
+          this.onSaveClick()
+          break;
+
+        case 'Clean':
+          this.onCleanClick()
+          break;
+
+        default:
+          break;
+      };
+    this.actionClicked = nextProps.store.getState().actionClicked;
+    }
+
+  }
+
 
   onSaveClick = () => {
     fetch("http://asha-katip.azurewebsites.net/api/issue", {
@@ -91,17 +116,12 @@ class Quality extends React.Component {
 
   }
 
-  state = {
-    customer: "",
-    location: "",
-    description: "",
-    project: ""
-  };
 
   onChangeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.store.getState().actionClicked);
   };
 
   render() {
@@ -116,7 +136,6 @@ class Quality extends React.Component {
             style={{ width: "60%" }}
           >
             <div>
-              <button onClick={this.onSaveClick} >Save</button>
               <div style={{ display: "flex", flex: 2 }}>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="Customer_Id">Customer</InputLabel>
@@ -283,7 +302,7 @@ class Quality extends React.Component {
           </Paper>
         </div>
 
-        {this.isNewRecord ?
+        {!this.isNewRecord ?
           <Paper
             className={classes.root}
             elevation={0}

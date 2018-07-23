@@ -6,6 +6,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import Button from "@material-ui/core/Button";
 
+import {actionBarClick} from "../actions"
+
 const drawerWidth = 215;
 
 const styles = theme => ({
@@ -44,22 +46,34 @@ class ActionBar extends Component {
         this.store = this.props.store;
     }
 
+    clickHandler = (e, name) => {
+        this.store.dispatch(actionBarClick(name))
+      }
+
     render() {
         const buttonList = this.store.getState().buttonList;
         const { classes, anchor, open } = this.props;
-
-        const buttonDrawer = buttonList.map(function(item){
-            const MaterialIcon = ({icon})  => {
+        const self = this;
+        const buttonDrawer = buttonList.map(function (item) {
+            const MaterialIcon = ({ icon }) => {
                 let resolved = require(`@material-ui/icons/${item.icon}`).default
 
-                if(!resolved)
+                if (!resolved)
                     throw Error(`Could not find material-ui-icons/${item.icon}`)
                 return React.createElement(resolved)
             }
-            return <Button variant="outlined" size="small" color="primary" className={classes.button}>
-            {item.name}
-            <MaterialIcon className={classes.rightIcon} />
-            </Button>}
+            return <Button
+                name = {item.name}
+                variant="outlined"
+                size="small"
+                color="primary"
+                className={classes.button}
+                onClick={(e) => self.clickHandler(e, item.name)}
+            >
+                {item.name}
+                <MaterialIcon className={classes.rightIcon} />
+            </Button>
+        }
         )
 
         return (

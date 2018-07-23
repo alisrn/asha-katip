@@ -17,6 +17,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MailFolderListItems from "../components/leftPanel";
 import ActionBar from "../components/actionBar";
 
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -109,6 +110,9 @@ class Layout extends Component {
       anchor: "left"
     };
   }
+
+
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -141,7 +145,7 @@ class Layout extends Component {
           </IconButton>
         </div>
         <Divider />
-        <MailFolderListItems store = {this.store}/>
+        <MailFolderListItems store={this.store} />
       </Drawer>
     );
 
@@ -170,10 +174,10 @@ class Layout extends Component {
           </Toolbar>
         </AppBar>
         {this.store.getState().buttonList ? (
-          <ActionBar store={this.store} anchor={anchor} open={open} />
+          <ActionBar {...this.props} store={this.store} anchor={anchor} open={open} />
         ) : (
-          <Divider />
-        )}
+            <Divider />
+          )}
         {right}
         <main
           className={classNames(classes.content, classes[`content-${anchor}`], {
