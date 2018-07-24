@@ -10,7 +10,7 @@ import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import swal from 'sweetalert';
 
-import { getButtonList } from "../actions";
+import { getButtonList, actionBarClick } from "../actions";
 
 const styles = theme => ({
   container: {
@@ -42,6 +42,8 @@ const styles = theme => ({
   }
 });
 
+const initialState = {Customer_Id:""}
+
 class Quality extends React.Component {
   constructor(props) {
     super(props);
@@ -49,9 +51,9 @@ class Quality extends React.Component {
     this.buttonList = [{ name: "Save", icon: "Save" },
     { name: "Clean", icon: "DeleteSweep" }];
 
-    this.actionClicked="";
-    this.state={
-
+    this.actionClicked = "";
+    this.state = {
+      ...initialState
     };
   }
 
@@ -61,8 +63,8 @@ class Quality extends React.Component {
   }
 
   componentWillUpdate = (nextProps) => {
-    if(this.actionClicked !== nextProps.store.getState().actionClicked){
-      switch(nextProps.store.getState().actionClicked){
+    if (this.actionClicked !== nextProps.store.getState().actionClicked) {
+      switch (nextProps.store.getState().actionClicked) {
         case 'Save':
           this.onSaveClick()
           break;
@@ -74,11 +76,19 @@ class Quality extends React.Component {
         default:
           break;
       };
-    this.actionClicked = nextProps.store.getState().actionClicked;
+      this.actionClicked = nextProps.store.getState().actionClicked;
+      this.store.dispatch(actionBarClick(""))
+
     }
 
   }
 
+  onCleanClick = () => {
+    this.setState(initialState)
+/*     this.props.history.push("/")
+    this.props.history.push("/new-issue-record") */
+    
+  }
 
   onSaveClick = () => {
     fetch("http://asha-katip.azurewebsites.net/api/issue", {
