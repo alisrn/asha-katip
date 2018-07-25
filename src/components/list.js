@@ -22,39 +22,16 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(ProblemDate,
-  Customer,
-  Project,
-  PartNumber,
-  ResponsibleDepartment) {
-  id += 1;
-  return {
-    id,
-    ProblemDate,
-    Customer,
-    Project,
-    PartNumber,
-    ResponsibleDepartment
-  };
-}
 
-const data = [
-  createData("01-01-2018", "Hyundai", "IA", "12345-ABC", "PLANT-1"),
-  createData("01-02-2018", "Ford", "GB", "12123-ABC", "PLANT-2"),
-  createData("01-03-2018", "Mobis", "FORD", "2231-ABC", "STA"),
-  createData("01-04-2018", "Toyota", "MOBIS", "33345-ABC", "METHOD"),
-  createData("01-05-2018", "Hyundai", "IA", "4412345-ABC", "MAINTENANCE"),
-  createData("01-06-2018", "Hyundai", "IA", "51512345-ABC", "PLANT-1")
-];
 
 class List extends React.Component {
   constructor(props) {
     super(props)
     this.store = this.props.store;
+    this.data = this.props.data;
     this.state = {
       selectedList: [],
-      rowCount: data.length,
+      rowCount: this.data.length,
     }
  }
 
@@ -90,7 +67,7 @@ class List extends React.Component {
 
   onSelectAll = () => {
     if (this.state.selectedList.length === 0) {
-      this.setState({ selectedList: data.map(n => n.id) })
+      this.setState({ selectedList: this.data.map(n => n.id) })
       return;
     }
     this.setState({ selectedList: [] })
@@ -121,7 +98,7 @@ class List extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
+            {this.data.map(n => {
               return (
                 <TableRow key={n.id}
                   hover={true}
