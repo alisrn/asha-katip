@@ -64,9 +64,11 @@ class ActionBar extends Component {
             }
             return <Button
                 name = {item.name}
+                key = {item.name}
                 variant="outlined"
                 size="small"
                 color="primary"
+                disabled = {item.disabled}
                 className={classes.button}
                 onClick={(e) => self.clickHandler(e, item.name)}
             >

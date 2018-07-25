@@ -48,8 +48,8 @@ class Quality extends React.Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
-    this.buttonList = [{ name: "Save", icon: "Save" },
-    { name: "Clean", icon: "DeleteSweep" }];
+    this.buttonList = [{ name: "Save", icon: "Save", disabled:false },
+    { name: "Clean", icon: "DeleteSweep" , disabled:false}];
 
     this.actionClicked = "";
     this.state = {
