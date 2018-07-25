@@ -29,10 +29,9 @@ class List extends React.Component {
   constructor(props) {
     super(props)
     this.store = this.props.store;
-    this.data = this.props.data;
     this.state = {
       selectedList: [],
-      rowCount: this.data.length,
+      rowCount: this.props.data.length,
     }
  }
 
@@ -68,7 +67,7 @@ class List extends React.Component {
 
   onSelectAll = () => {
     if (this.state.selectedList.length === 0) {
-      this.setState({ selectedList: this.data.map(n => n.id) })
+      this.setState({ selectedList: this.props.data.map(n => n.id) })
       return;
     }
     this.setState({ selectedList: [] })
@@ -99,27 +98,27 @@ class List extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.data.map(n => {
+            {this.props.data.map(n => {
               return (
-                <TableRow key={n.id}
+                <TableRow key={n.Id}
                   hover={true}
                   role="checkbox"
-                  onClick={e => this.handleClick(e, n.id)}
-                  selected={this.isSelected(n.id)}
-                  aria-checked={this.isSelected(n.id)}
+                  onClick={e => this.handleClick(e, n.Id)}
+                  selected={this.isSelected(n.Id)}
+                  aria-checked={this.isSelected(n.Id)}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={this.isSelected(n.id)}
+                      checked={this.isSelected(n.Id)}
                     />
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {n.ProblemDate}
+                    {n.Problem_Date}
                   </TableCell>
-                  <TableCell >{n.Customer}</TableCell>
-                  <TableCell >{n.Project}</TableCell>
-                  <TableCell >{n.PartNumber}</TableCell>
-                  <TableCell >{n.ResponsibleDepartment}</TableCell>
+                  <TableCell numeric>{n.Customer_Id}</TableCell>
+                  <TableCell numeric>{n.Project_Id}</TableCell>
+                  <TableCell numeric>{n.Partnumber_Id}</TableCell>
+                  <TableCell numeric>{n.Resp_Dept_Id}</TableCell>
                 </TableRow>
               );
             })}
