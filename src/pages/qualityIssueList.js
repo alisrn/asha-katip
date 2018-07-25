@@ -3,6 +3,7 @@ import React from 'react';
 
 import { getButtonList, isNewRecord } from "../actions";
 import List from '../components/list'
+import CriteriaPanel from '../components/criteriaPanel'
 
 
 let id = 0;
@@ -51,6 +52,7 @@ class QualityIssueList extends React.Component {
     const {props} = this.props
     return (
       <div>
+        <CriteriaPanel />
         <List data={data} buttonList = {this.buttonList} {...props} store={this.store} />
       </div>
     );
