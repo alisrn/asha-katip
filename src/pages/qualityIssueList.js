@@ -54,12 +54,15 @@ class QualityIssueList extends React.Component {
     this.store = this.props.store;
     this.state = {
       selectedList: [],
+      rowCount: data.length,
     }
     this.buttonList = [{ name: "Get Info", icon: "Collections" },
-    { name: "Delete", icon: "Delete" }];
+    { name: "Open", icon: "OpenInBrowser" },
+    { name: "Delete", icon: "Delete" },
+    { name: "New", icon: "OpenInNew" }];
   }
 
-  componentWillMount = () => {
+  componentWillMount = () => {
     this.store.dispatch(getButtonList(this.buttonList));
     this.store.dispatch(isNewRecord(false))
 
@@ -82,14 +85,22 @@ class QualityIssueList extends React.Component {
       );
     }
     this.setState({ selectedList: newSelected });
-    console.log(newSelected[0]);
   }
 
-  isSelected = id => this.state.selectedList.indexOf(id) !== -1 
+  isSelected = id => this.state.selectedList.indexOf(id) !== -1;
+
+  onSelectAll = () => {
+    if (this.state.selectedList.length === 0) {
+      this.setState({ selectedList: data.map(n => n.id) })
+      return;
+    }
+    this.setState({ selectedList: [] })
+  }
 
   render() {
     const { classes } = this.props;
-
+    const { rowCount } = this.state
+    const numSelected = this.state.selectedList.length
 
     return (
       <Paper className={classes.root}>
@@ -98,6 +109,9 @@ class QualityIssueList extends React.Component {
             <TableRow>
               <TableCell padding="checkbox" >
                 <Checkbox
+                  indeterminate={numSelected > 0 && numSelected < rowCount}
+                  checked={numSelected === rowCount}
+                  onClick={this.onSelectAll}
                 />
               </TableCell>
               <TableCell>Problem Date</TableCell>
@@ -110,11 +124,16 @@ class QualityIssueList extends React.Component {
           <TableBody>
             {data.map(n => {
               return (
-                <TableRow key={n.id}>
+                <TableRow key={n.id}
+                  hover={true}
+                  role="checkbox"
+                  onClick={e => this.handleClick(e, n.id)}
+                  selected={this.isSelected(n.id)}
+                  aria-checked={this.isSelected(n.id)}
+                >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      isSelected={this.isSelected(n.id)}
-                      onClick={e => this.handleClick(e, n.id)}
+                      checked={this.isSelected(n.id)}
                     />
                   </TableCell>
                   <TableCell component="th" scope="row">
