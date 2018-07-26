@@ -31,7 +31,7 @@ class List extends React.Component {
     this.store = this.props.store;
     this.state = {
       selectedList: [],
-      rowCount: this.props.data.length,
+      //rowCount: this.props.data.length,
     }
  }
 
@@ -67,7 +67,7 @@ class List extends React.Component {
 
   onSelectAll = () => {
     if (this.state.selectedList.length === 0) {
-      this.setState({ selectedList: this.props.data.map(n => n.id) })
+      this.setState({ selectedList: this.props.data.map(n => n.Id) })
       return;
     }
     this.setState({ selectedList: [] })
@@ -75,7 +75,7 @@ class List extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { rowCount } = this.state
+    const  rowCount  = this.props.data.length;
     const numSelected = this.state.selectedList.length
 
     return (

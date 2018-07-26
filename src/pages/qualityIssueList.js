@@ -6,33 +6,6 @@ import List from '../components/list'
 import CriteriaPanel from '../components/criteriaPanel'
 
 
-let id = 0;
-function createData(ProblemDate,
-  Customer,
-  Project,
-  PartNumber,
-  ResponsibleDepartment) {
-  id += 1;
-  return {
-    id,
-    ProblemDate,
-    Customer,
-    Project,
-    PartNumber,
-    ResponsibleDepartment
-  };
-}
-
-/* const data = [
-  createData("01-01-2018", "Hyundai", "IA", "12345-ABC", "PLANT-1"),
-  createData("01-02-2018", "Ford", "GB", "12123-ABC", "PLANT-2"),
-  createData("01-03-2018", "Mobis", "FORD", "2231-ABC", "STA"),
-  createData("01-04-2018", "Toyota", "MOBIS", "33345-ABC", "METHOD"),
-  createData("01-05-2018", "Hyundai", "IA", "4412345-ABC", "MAINTENANCE"),
-  createData("01-06-2018", "Hyundai", "IA", "51512345-ABC", "PLANT-1")
-]; */
-
-
 class QualityIssueList extends React.Component {
   constructor(props) {
     super(props)
